@@ -1,0 +1,112 @@
+NAME
+    POE::Component::Server::Syslog - syslog services for POE
+
+AUTHOR
+    Matt Cashner (sungo@cpan.org)
+
+SYNOPSIS
+        POE::Component::Server::Syslog->spawn(BindAddress => '127.0.0.1',
+                                              BindPort => '514',
+                                              ClientInput => \&input,
+                                             );
+
+        sub input {
+            my $message = $_[ARG0];
+            # .. do stuff ..
+        }
+
+DESCRIPTION
+    This component provides very simple UDP Syslog services for POE (named
+    pipe and other syslog interoperability features are expected in future
+    versions).
+
+METHODS
+  spawn()
+    Spawns a new udp listener. Requires one argument, ClientInput which must
+    be a reference to a subroutine. This argument will become a POE state
+    that will be called when input from a syslog client has been recieved.
+    Returns the POE::Session object it creates.
+
+    "spawn()" also accepts the following options:
+
+    * BindAddress
+        The address to bind the listener to. Defaults to 127.0.0.1
+
+    * BindPort
+        The port number to bind the listener to. Defaults to 514
+
+    * MaxLen
+        The maximum length of a datagram. Defaults to 1024, which is the
+        usual default of most syslog and syslogd implementations.
+
+    * ClientError
+        An optional code reference. This becomes a POE state that will get
+        called when the component recieves a message it cannot parse. The
+        erroneous message is passed in as ARG0.
+
+  ClientInput
+    The ClientInput routine obtained by "spawn()" will be passed a hash
+    reference as ARG0 containing the following information:
+
+    * time
+        The time of the datagram (as specified by the datagram itself)
+
+    * pri
+        The priority of message
+
+    * host
+        The host the message claims to have come from
+
+    * msg
+        The message itself. This often includes a process name, pid number,
+        and user name.
+
+DATE
+    $Date: 2003/06/26 05:51:14 $
+
+REVISION
+    $Revision: 1.1 $
+
+    Note: This does not necessarily correspond to the distribution version
+    number.
+
+BUGS AND ISSUES
+    * Need to export constants for standard names for priorities.
+    * WRITE TESTS
+
+THANKS
+    Many thanks to the POE community for being so supportive and wonderful.
+    Infinite thanks to Rocco Caputo for POE in the first place, for being a
+    wonderful second set of eyes, and for the code on which this is
+    conceptually based.
+
+LICENSE
+    Portions Copyright (c) 2001, Swiss Federal Institute of Technology,
+    Zurich. These portions are clearly marked in the code itself and are
+    available under the same terms as Perl itself.
+
+    Copyright (c) 2003, Matt Cashner
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+    IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,
+    INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+    HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+    STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+    ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+

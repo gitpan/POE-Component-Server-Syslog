@@ -1,0 +1,11 @@
+INSTALL
+MANIFEST			This list of files
+MANIFEST.SKIP
+Makefile.PL
+README
+VERSION
+lib/POE/Component/Server/Syslog.pm
+samples/dumper.t
+t/0-signature.t
+t/00-compile.t
+SIGNATURE
