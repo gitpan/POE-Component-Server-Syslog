@@ -52,26 +52,26 @@ METHODS
         The time of the datagram (as specified by the datagram itself)
 
     * pri
-        The priority of message
+        The priority of message.
 
     * facility
-        The "facility" number decoded from the pri
+        The "facility" number decoded from the pri.
 
     * severity
-        The "severity" number decoded from the pri
+        The "severity" number decoded from the pri.
 
     * host
-        The host the message claims to have come from
+        The host that sent the message.
 
     * msg
         The message itself. This often includes a process name, pid number,
         and user name.
 
 DATE
-    $Date: 2003/07/04 04:14:08 $
+    $Date: 2003/07/20 21:42:39 $
 
 REVISION
-    $Revision: 1.3 $
+    $Revision: 1.4 $
 
     Note: This does not necessarily correspond to the distribution version
     number.

@@ -17,7 +17,7 @@ like($@, qr/requires a InputState argument/, "spawn() with invalid InputState ar
 
 
 package POE::Session;
-
+no warnings;
 sub create {
     return @_;
 }

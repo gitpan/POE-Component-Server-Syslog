@@ -1,4 +1,4 @@
-# $Id: Syslog.pm,v 1.9 2003/07/04 04:06:55 sungo Exp $
+# $Id: Syslog.pm,v 1.10 2003/07/20 21:38:18 sungo Exp $
 package POE::Component::Server::Syslog;
 
 # Docs at the end.
@@ -8,11 +8,12 @@ use warnings;
 use strict;
 
 use IO::Socket;
+use Socket;
 use POE;
 use Carp;
 use Time::ParseDate;
 
-our $VERSION = (qw($Revision: 1.9 $))[1];
+our $VERSION = (qw($Revision: 1.10 $))[1];
 
 sub BINDADDR        () { '127.0.0.1' }
 sub BINDPORT        () { 514 }
@@ -80,10 +81,17 @@ sub _stop {
 sub select_read {
     my $message;
     my $remote_socket =
-      recv( $_[HEAP]->{socket_handle}, $message, $_[HEAP]->{MaxLen}, 0 );
+      $_[HEAP]->{socket_handle}->recv($message, $_[HEAP]->{MaxLen}, 0 );
     if ( defined $message ) {
         if(my $msg = _parse_syslog_message($message)) {
+
+	    $msg->{'host'} = gethostbyaddr(
+		(sockaddr_in($remote_socket))[1],
+		AF_INET,
+	    );
+
             $_[KERNEL]->yield( 'client_input', $msg );
+
         } else {
             $_[KERNEL]->yield( 'client_error', $message );
         }
@@ -200,19 +208,19 @@ The time of the datagram (as specified by the datagram itself)
 
 =item * pri
 
-The priority of message
+The priority of message.
 
 =item * facility
 
-The "facility" number decoded from the pri
+The "facility" number decoded from the pri.
 
 =item * severity
 
-The "severity" number decoded from the pri
+The "severity" number decoded from the pri.
 
 =item * host
 
-The host the message claims to have come from
+The host that sent the message.
 
 =item * msg
 
@@ -223,11 +231,11 @@ user name.
 
 =head1 DATE
 
-$Date: 2003/07/04 04:06:55 $
+$Date: 2003/07/20 21:38:18 $
 
 =head1 REVISION
 
-$Revision: 1.9 $
+$Revision: 1.10 $
 
 Note: This does not necessarily correspond to the distribution version number.
 
