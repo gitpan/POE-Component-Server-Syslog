@@ -6,8 +6,8 @@ AUTHOR
 
 SYNOPSIS
         POE::Component::Server::Syslog->spawn(BindAddress => '127.0.0.1',
-                                              BindPort => '514',
-                                              ClientInput => \&input,
+                                              BindPort    => '514',
+                                              InputState  => \&input,
                                              );
 
         sub input {
@@ -22,7 +22,7 @@ DESCRIPTION
 
 METHODS
   spawn()
-    Spawns a new udp listener. Requires one argument, ClientInput which must
+    Spawns a new udp listener. Requires one argument, InputState which must
     be a reference to a subroutine. This argument will become a POE state
     that will be called when input from a syslog client has been recieved.
     Returns the POE::Session object it creates.
@@ -39,12 +39,12 @@ METHODS
         The maximum length of a datagram. Defaults to 1024, which is the
         usual default of most syslog and syslogd implementations.
 
-    * ClientError
+    * ErrorState
         An optional code reference. This becomes a POE state that will get
         called when the component recieves a message it cannot parse. The
         erroneous message is passed in as ARG0.
 
-  ClientInput
+  InputState
     The ClientInput routine obtained by "spawn()" will be passed a hash
     reference as ARG0 containing the following information:
 
@@ -62,10 +62,10 @@ METHODS
         and user name.
 
 DATE
-    $Date: 2003/06/26 05:51:14 $
+    $Date: 2003/06/30 04:21:20 $
 
 REVISION
-    $Revision: 1.1 $
+    $Revision: 1.2 $
 
     Note: This does not necessarily correspond to the distribution version
     number.

@@ -9,8 +9,8 @@ use Data::Dumper;
 
 POE::Component::Server::Syslog->spawn(
     BindPort => 4095,
-    ClientInput => \&client_input,
-    ClientError => \&client_error,
+    InputState => \&client_input,
+    ErrorState => \&client_error,
 );
 
 $poe_kernel->run();

@@ -1,4 +1,4 @@
-# $Id: Syslog.pm,v 1.7 2003/06/26 05:50:26 sungo Exp $
+# $Id: Syslog.pm,v 1.8 2003/06/30 03:51:12 sungo Exp $
 package POE::Component::Server::Syslog;
 
 # Docs at the end.
@@ -12,7 +12,7 @@ use POE;
 use Carp;
 use Time::ParseDate;
 
-our $VERSION = (qw($Revision: 1.7 $))[1];
+our $VERSION = (qw($Revision: 1.8 $))[1];
 
 sub BINDADDR        () { '127.0.0.1' }
 sub BINDPORT        () { 514 }
@@ -25,18 +25,18 @@ sub spawn {
     my %args = @_;
     
     croak( __PACKAGE__
-        . "->spawn() requires a ClientInput argument which must be a subroutine reference"
+        . "->spawn() requires a InputState argument which must be a subroutine reference"
       )
-      unless ( ( defined $args{ClientInput} )
-        and ( ref $args{ClientInput} eq 'CODE' ) );
+      unless ( ( defined $args{InputState} )
+        and ( ref $args{InputState} eq 'CODE' ) );
    
     return POE::Session->create(
         inline_states => {
             _start       => \&_start,
             _stop        => \&_stop,
             select_read  => \&select_read,
-            client_input => $args{ClientInput},
-            client_error => $args{ClientError} || sub { 'i like pie' },
+            client_input => $args{InputState},
+            client_error => $args{ErrorState} || sub { 'i like pie' },
         },
         heap => { 
             BindAddress => $args{BindAddress} || BINDADDR, 
@@ -138,8 +138,8 @@ Matt Cashner (sungo@cpan.org)
 =head1 SYNOPSIS
 
     POE::Component::Server::Syslog->spawn(BindAddress => '127.0.0.1',
-                                          BindPort => '514',
-                                          ClientInput => \&input,
+                                          BindPort    => '514',
+                                          InputState  => \&input,
                                          );
 
     sub input {
@@ -156,7 +156,7 @@ other syslog interoperability features are expected in future versions).
 
 =head2 spawn()
 
-Spawns a new udp listener. Requires one argument, ClientInput which must
+Spawns a new udp listener. Requires one argument, InputState which must
 be a reference to a subroutine. This argument will become a POE state
 that will be called when input from a syslog client has been recieved.
 Returns the POE::Session object it creates.
@@ -178,7 +178,7 @@ The port number to bind the listener to. Defaults to 514
 The maximum length of a datagram. Defaults to 1024, which is the usual
 default of most syslog and syslogd implementations.
 
-=item * ClientError
+=item * ErrorState
 
 An optional code reference. This becomes a POE state that will get
 called when the component recieves a message it cannot parse. The
@@ -186,7 +186,7 @@ erroneous message is passed in as ARG0.
 
 =back
 
-=head2 ClientInput
+=head2 InputState
 
 The ClientInput routine obtained by C<spawn()> will be passed a hash
 reference as ARG0 containing the following information:
@@ -214,11 +214,11 @@ user name.
 
 =head1 DATE
 
-$Date: 2003/06/26 05:50:26 $
+$Date: 2003/06/30 03:51:12 $
 
 =head1 REVISION
 
-$Revision: 1.7 $
+$Revision: 1.8 $
 
 Note: This does not necessarily correspond to the distribution version number.
 

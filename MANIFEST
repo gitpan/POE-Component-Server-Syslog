@@ -1,11 +1,14 @@
 INSTALL
+LICENSE
 MANIFEST			This list of files
 MANIFEST.SKIP
 Makefile.PL
 README
+SIGNATURE
 VERSION
 lib/POE/Component/Server/Syslog.pm
 samples/dumper.t
 t/0-signature.t
 t/00-compile.t
-SIGNATURE
+t/01-spawn.t
+t/02-syslog_parse.t
