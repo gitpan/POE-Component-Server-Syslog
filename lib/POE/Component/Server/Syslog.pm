@@ -1,4 +1,4 @@
-# $Id: Syslog.pm,v 1.8 2003/06/30 03:51:12 sungo Exp $
+# $Id: Syslog.pm,v 1.9 2003/07/04 04:06:55 sungo Exp $
 package POE::Component::Server::Syslog;
 
 # Docs at the end.
@@ -12,7 +12,7 @@ use POE;
 use Carp;
 use Time::ParseDate;
 
-our $VERSION = (qw($Revision: 1.8 $))[1];
+our $VERSION = (qw($Revision: 1.9 $))[1];
 
 sub BINDADDR        () { '127.0.0.1' }
 sub BINDPORT        () { 514 }
@@ -93,26 +93,27 @@ sub select_read {
 sub _parse_syslog_message {
     my $str = shift;
 
-    # The following regexp is borrowed from Parse::Syslog by David Schweikert 
+    # The following regexp is derived from Parse::Syslog by David Schweikert 
     # <dws@ee.ethz.ch> which is Copyright (c) 2001 Swiss Federal
-    # Institute of Technology, Zurich. Small addition by this module's author.
-    if ( $str =~ /^<(\d+)>     # priority -- 1
-            (\S{3})\s+(\d+)    # date  -- 2, 3
-            \s
-            (\d+):(\d+):(\d+)  # time  -- 4, 5, 6
-            \s
-            ([-\w\.]+)         # host  -- 7
-            \s+
-            (.*)               # text  -- 8
+    # Institute of Technology, Zurich. 
+    if ( $str =~ /^<(\d+)>         # priority -- 1
+            (?: 
+                (\S{3})\s+(\d+)    # month day -- 2, 3
+                \s
+                (\d+):(\d+):(\d+)  # time  -- 4, 5, 6
+            )?
+            \s*
+            (.*)                   # text  --  7
             $/x
       )
     {
-        my $time = parsedate("$2 $3 $4:$5:$6");
+        my $time = $2 && parsedate("$2 $3 $4:$5:$6");
         my $msg  = {
             time => $time,
             pri  => $1,
-            host => $7,
-            msg  => $8,
+            facility => int($1/8),
+            severity => int($1%8),
+            msg  => $7,
         };
 
         return $msg;
@@ -201,6 +202,14 @@ The time of the datagram (as specified by the datagram itself)
 
 The priority of message
 
+=item * facility
+
+The "facility" number decoded from the pri
+
+=item * severity
+
+The "severity" number decoded from the pri
+
 =item * host
 
 The host the message claims to have come from
@@ -214,11 +223,11 @@ user name.
 
 =head1 DATE
 
-$Date: 2003/06/30 03:51:12 $
+$Date: 2003/07/04 04:06:55 $
 
 =head1 REVISION
 
-$Revision: 1.8 $
+$Revision: 1.9 $
 
 Note: This does not necessarily correspond to the distribution version number.
 
@@ -239,11 +248,10 @@ Infinite thanks to Rocco Caputo for POE in the first place, for being a
 wonderful second set of eyes, and for the code on which this is conceptually 
 based. 
 
-=head1 LICENSE
+Thanks to Chris Fedde for providing patches to make this suck less. His code is
+provided in the public domain and is available under the license terms below.
 
-Portions Copyright (c) 2001, Swiss Federal Institute of Technology, Zurich.
-These portions are clearly marked in the code itself and are available under 
-the same terms as Perl itself.
+=head1 LICENSE
 
 Copyright (c) 2003, Matt Cashner
 
