@@ -6,7 +6,7 @@ use warnings;
 use IO::Socket::INET;
 
 my $sock = IO::Socket::INET->new(
-    PeerPort  => 9999,
+    PeerPort  => 4095,
     PeerAddr  => 'localhost',
     Proto     => 'udp',
     Broadcast => 1 )

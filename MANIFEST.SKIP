@@ -3,6 +3,7 @@ CVS
 \.cvsignore
 \.rej$
 \.swo$
+.svn
 \.swp$
 ^Makefile$
 ^Makefile\.old$
