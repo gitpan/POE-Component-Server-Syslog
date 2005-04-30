@@ -8,6 +8,8 @@ use POSIX qw(strftime);
 use POE;
 use POE::Component::Server::Syslog::TCP;
 
+our $TIME = time();
+
 POE::Session->create(
 	inline_states      => {
 		_start         => \&start,
@@ -59,8 +61,7 @@ sub send_test_data {
 		Broadcast => 1,
 	) or die "Can't bind : $@\n";
 
-	my $now = time();
-	my $ts = strftime("%b %d %H:%M:%S", localtime($now));
+	my $ts = strftime("%b %d %H:%M:%S", localtime($TIME));
 
 	$sock->send("<1>$ts /USR/SBIN/CRON[16273]: (root) CMD (test -x /usr/lib/sysstat/sa1 && /usr/lib/sysstat/sa1)");
 	$sock = undef;
@@ -81,7 +82,7 @@ sub client_input {
 			severity  => 1,
 			host      => scalar gethostbyaddr(inet_aton('127.0.0.1'),AF_INET),
 			facility  => 0,
-			'time'    => time(),
+			'time'    => $TIME,
 		},
 		'input data is valid',
 	);
