@@ -80,7 +80,7 @@ sub client_input {
 			msg       => '/USR/SBIN/CRON[16273]: (root) CMD (test -x /usr/lib/sysstat/sa1 && /usr/lib/sysstat/sa1)',
 			pri       => 1,
 			severity  => 1,
-			host      => 'localhost',
+			host      => scalar gethostbyaddr(inet_aton('127.0.0.1'),AF_INET),
 			facility  => 0,
 			'time'    => time(),
 		},

@@ -1,4 +1,4 @@
-# $Id: Makefile.PL 438 2004-11-28 23:50:30Z sungo $
+# $Id: Makefile.PL 471 2005-04-30 03:21:49Z sungo $
 
 use 5.006001;
 use ExtUtils::MakeMaker;
@@ -32,7 +32,7 @@ WriteMakefile(
 		'Carp'             => 0,
 	},
 	dist => {
-		PREOP => 'svn log --non-interactive -r 0:HEAD > ${DISTVNAME}/Changes; perldoc -t lib/POE/Component/Server/Syslog.pm > ${DISTVNAME}/README',
+		PREOP => 'svn log --non-interactive -r 0:HEAD > $(DISTVNAME)/Changes; perldoc -t lib/POE/Component/Server/Syslog.pm > $(DISTVNAME)/README',
 	},
 );
 

@@ -284,3 +284,19 @@ r451 | sungo | 2004-12-26 20:50:21 -0500 (Sun, 26 Dec 2004) | 1 line
 
 update dist version for release
 ------------------------------------------------------------------------
+r452 | sungo | 2004-12-26 21:00:25 -0500 (Sun, 26 Dec 2004) | 1 line
+
+changes caused by release process
+------------------------------------------------------------------------
+r469 | sungo | 2005-04-29 23:14:41 -0400 (Fri, 29 Apr 2005) | 1 line
+
+fix the localhost-isnt-called-localhost issue in the tests
+------------------------------------------------------------------------
+r470 | sungo | 2005-04-29 23:17:55 -0400 (Fri, 29 Apr 2005) | 1 line
+
+bump version for release
+------------------------------------------------------------------------
+r471 | sungo | 2005-04-29 23:21:49 -0400 (Fri, 29 Apr 2005) | 1 line
+
+fix the makefile preop shizzle. update meta files for release.
+------------------------------------------------------------------------
