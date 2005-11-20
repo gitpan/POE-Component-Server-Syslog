@@ -1,4 +1,4 @@
-# $Id: Syslog.pm 450 2004-12-27 01:42:43Z sungo $
+# $Id: Syslog.pm 579 2005-11-20 22:52:26Z sungo $
 package POE::Filter::Syslog;
 
 use warnings;
@@ -7,7 +7,7 @@ use strict;
 use POE;
 use Time::ParseDate;
 
-our $VERSION = '1.'.sprintf "%04d", (qw($Rev: 450 $))[1];
+our $VERSION = '1.'.sprintf "%04d", (qw($Rev: 579 $))[1];
 
 our $SYSLOG_REGEXP = q|
 ^<(\d+)>                       # priority -- 1
@@ -42,7 +42,7 @@ sub get {
 	my @found;
 	if($stream and length $stream) {
 
-		while ( $stream =~ s/$SYSLOG_REGEXP//x ) {
+		while ( $stream =~ s/$SYSLOG_REGEXP//sx ) {
 			my $time = $2 && parsedate("$2 $3 $4:$5:$6");
 			$time ||= time();
 
@@ -64,7 +64,7 @@ sub get_one {
 	my $self = shift;
 	my $found = 0;
 	if($self->{buffer} and length $self->{buffer}) {
-		if ( $self->{buffer} =~ s/$SYSLOG_REGEXP//x ) {
+		if ( $self->{buffer} =~ s/$SYSLOG_REGEXP//sx ) {
 			my $time = $2 && parsedate("$2 $3 $4:$5:$6");
 			my $msg  = {
 				time     => $time,
@@ -155,17 +155,17 @@ user name.
 
 =head1 DATE
 
-$Date: 2004-12-26 20:42:43 -0500 (Sun, 26 Dec 2004) $
+$Date: 2005-11-20 17:52:26 -0500 (Sun, 20 Nov 2005) $
 
 =head1 REVISION
 
-$Rev: 450 $
+$Rev: 579 $
 
 Note: This does not necessarily correspond to the distribution version number.
 
 =head1 LICENSE
 
-Copyright (c) 2003-2004, Matt Cashner. All rights reserved.
+Copyright (c) 2003-2005, Matt Cashner. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are

@@ -1,3 +1,11 @@
+inc/Module/Install.pm
+inc/Module/Install/Base.pm
+inc/Module/Install/Can.pm
+inc/Module/Install/Fetch.pm
+inc/Module/Install/Makefile.pm
+inc/Module/Install/Metadata.pm
+inc/Module/Install/Win32.pm
+inc/Module/Install/WriteAll.pm
 INSTALL
 lib/POE/Component/Server/Syslog.pm
 lib/POE/Component/Server/Syslog/TCP.pm
@@ -12,7 +20,9 @@ samples/tcp_dumper
 samples/tcp_sender
 samples/udp_dumper
 samples/udp_sender
+SIGNATURE
 t/00-compile.t
+t/000-signature.t
 t/01-filter.t
 t/02-udp.t
 t/03-tcp.t

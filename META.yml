@@ -1,16 +1,16 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         POE-Component-Server-Syslog
-version:      1.02
-version_from: VERSION
-installdirs:  site
-requires:
-    Carp:                          0
-    IO::Socket:                    0
-    Params::Validate:              0
-    POE:                           0.24
-    Test::More:                    0
-    Time::ParseDate:               0
-
+name: POE-Component-Server-Syslog
+version: 1.03
+author: Matt Cashner (sungo@pobox.com)
+license: bsd
 distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.17
+requires:
+  POE: 0.24
+  Params::Validate: 0
+  IO::Socket: 0
+  Time::ParseDate: 0
+  Test::More: 0
+  Carp: 0
+no_index:
+  directory:
+    - inc
+generated_by: Module::Install version 0.39

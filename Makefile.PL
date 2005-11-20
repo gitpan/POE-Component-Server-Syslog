@@ -1,38 +1,20 @@
-# $Id: Makefile.PL 471 2005-04-30 03:21:49Z sungo $
+# $Id: Makefile.PL 578 2005-11-20 22:52:08Z sungo $
 
 use 5.006001;
-use ExtUtils::MakeMaker;
-use File::Find;
+use inc::Module::Install;
 
-my @tests;
-sub wanted { /\.t$/ && push @tests, $_ }
-find( { wanted => \&wanted, no_chdir => 1 }, 't/' );
-@tests = sort @tests;
+name            ('POE-Component-Server-Syslog');
+author          ('Matt Cashner (sungo@pobox.com)');
+version_from    ('VERSION');
+license         ('bsd');
 
-WriteMakefile(
-	NAME => 'POE::Component::Server::Syslog',
+requires        ('POE' => 0.24);
+requires        ('Params::Validate');
+requires        ('IO::Socket');
+requires        ('Time::ParseDate');
+requires        ('Test::More');
+requires        ('Carp');
 
-	AUTHOR   => 'Matt Cashner (sungo@pobox.com)',
-	ABSTRACT => 'Provides syslog server ability for POE',
+sign            (1);
 
-	VERSION_FROM => 'VERSION',
-	dist         => {
-		'COMPRESS' => 'gzip -9f',
-		'SUFFIX'   => 'gz',
-	},
-	test => {
-		TESTS => join " ", @tests
-	},
-	PREREQ_PM => {
-		'POE'              => '0.24',
-		'Params::Validate' => 0,
-		'IO::Socket'       => 0,
-		'Time::ParseDate'  => 0,
-		'Test::More'       => 0,
-		'Carp'             => 0,
-	},
-	dist => {
-		PREOP => 'svn log --non-interactive -r 0:HEAD > $(DISTVNAME)/Changes; perldoc -t lib/POE/Component/Server/Syslog.pm > $(DISTVNAME)/README',
-	},
-);
-
+WriteAll();
