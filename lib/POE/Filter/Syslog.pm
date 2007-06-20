@@ -7,7 +7,7 @@ use strict;
 use POE;
 use Time::ParseDate;
 
-our $VERSION = '1.'.sprintf "%04d", (qw($Rev: 579 $))[1];
+our $VERSION = '1.04';
 
 our $SYSLOG_REGEXP = q|
 ^<(\d+)>                       # priority -- 1
@@ -114,6 +114,26 @@ specification (C<get_one>). If, at some point, POE deprecates the older
 specification, this module will drop support for it. As such, only use
 of the newer specification is recommended.
 
+=head1 CONSTRUCTOR
+
+=over
+
+=item new
+
+Creates a new filter object.
+
+=back
+
+=head1 METHODS
+
+=over
+
+=item get
+
+=item get_one_start
+
+=item get_one
+
 C<get_one> returns a list of records with the following fields:
 
 =over 4
@@ -142,6 +162,8 @@ The host that sent the message.
 
 The message itself. This often includes a process name, pid number, and
 user name.
+
+=back
 
 =back
 

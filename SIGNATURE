@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.44.
+signed via the Module::Signature module, version 0.55.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,29 +14,31 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
+SHA1 3bc54acb58a55932797fd6802c601668b3be0736 Changes
 SHA1 a97bb3a7b2cbe89ef5995dd8173d1faafacd0044 INSTALL
 SHA1 d629cf536da90572f1be6755409985b199096385 LICENSE
-SHA1 bb33d5ff9e598e0f9a9fd33df000153ac6c999ad MANIFEST
+SHA1 8c2c4f58ce78ae6399a6a0d41fb7d24db93da67a MANIFEST
 SHA1 b3276e3c972626aaae45dab2484183b0d8c45ced MANIFEST.SKIP
-SHA1 5071fac72a5bd45e85408b5248d5da9f075149f2 META.yml
+SHA1 7ef9780e55a19cbb95b0ba0bd6e0747827aaa850 META.yml
 SHA1 5edf1375f6dc34ef9ad00c42ec0e6557fe9ea1c0 Makefile.PL
-SHA1 efabfbef3dc29962ea5170552034abe934911df9 VERSION
-SHA1 4641161cca4e5eca1b59f86b0ada5c8f335351ff inc/Module/Install.pm
-SHA1 412fd88d5aa0e8b40538e1312bb63e338383a39e inc/Module/Install/Base.pm
-SHA1 c8fd540dd17cc3e3eb153dba71a54fe73ff5c2e2 inc/Module/Install/Can.pm
-SHA1 4464d33fdfbbaf8042894aea1cb85485a1512261 inc/Module/Install/Fetch.pm
-SHA1 81297907d0fc6c8d1fa18af02eac3e63c8e212e4 inc/Module/Install/Makefile.pm
-SHA1 130e33247978183b37c6c252659320a2c5da10fc inc/Module/Install/Metadata.pm
-SHA1 e9755612a43199453c11e2294b2356035b0b56bc inc/Module/Install/Win32.pm
-SHA1 13bed7b359c03a633680c4a26500bb662e20e1ee inc/Module/Install/WriteAll.pm
-SHA1 bd2e38cb55ec53dec25a5ef4ba8ac1130dffcafc lib/POE/Component/Server/Syslog.pm
-SHA1 f3579827bc9594cb2cafaf7ebd77c68cae13c084 lib/POE/Component/Server/Syslog/TCP.pm
-SHA1 9e16fb4e4e1a7d55ce308ce50e99e2030c08ad41 lib/POE/Component/Server/Syslog/UDP.pm
-SHA1 0488c62bba9bb0af6df94d2a8e226b9879470cbd lib/POE/Filter/Syslog.pm
-SHA1 f40f2f507b3a4ce819446cd911989439bbf92082 samples/tcp_dumper
-SHA1 1924d032aacc3274d9e16145c58479cb95dfc131 samples/tcp_sender
-SHA1 281d3a84c7595ceed9e3222d462b4fb14777b308 samples/udp_dumper
-SHA1 28acb7aa3a8e8a54ca556d06aa62be54fe135f07 samples/udp_sender
+SHA1 edffde3c407a053ab8b4dfc4de7e79ec079895d4 README
+SHA1 e00b61530675046d4f0b819d25aba938507c1daf VERSION
+SHA1 f40f2f507b3a4ce819446cd911989439bbf92082 examples/tcp_dumper
+SHA1 1924d032aacc3274d9e16145c58479cb95dfc131 examples/tcp_sender
+SHA1 281d3a84c7595ceed9e3222d462b4fb14777b308 examples/udp_dumper
+SHA1 28acb7aa3a8e8a54ca556d06aa62be54fe135f07 examples/udp_sender
+SHA1 78edb89a439463e44c33a72bbee84c54d0dc8aaf inc/Module/Install.pm
+SHA1 8ea4e37df83fd0c1c050be5c8da75545c3828d9b inc/Module/Install/Base.pm
+SHA1 1da6031583c32f0d1ec073b8376102fc51427dcc inc/Module/Install/Can.pm
+SHA1 b779375b90c16af2f31f38a1dd2b5df223c7f2fb inc/Module/Install/Fetch.pm
+SHA1 2054450e1e9c1dd8056362bf4a64ae70d5d71476 inc/Module/Install/Makefile.pm
+SHA1 5d6189b2cad15cf9932a28faafd55130c8247e83 inc/Module/Install/Metadata.pm
+SHA1 02af973fae2ac3531fa6b704574b2b8cb2a08148 inc/Module/Install/Win32.pm
+SHA1 3a2eab96e91cca8d99938cda7791759ae9d97b3a inc/Module/Install/WriteAll.pm
+SHA1 69e6db0237bcc134c160fa5f3f8a26ed8727b897 lib/POE/Component/Server/Syslog.pm
+SHA1 f353d5f01ffd98e90ecbbf21f24984e884d141f4 lib/POE/Component/Server/Syslog/TCP.pm
+SHA1 8d70b2e48e377b9c77257facbd5ebb75ee0afb92 lib/POE/Component/Server/Syslog/UDP.pm
+SHA1 58b82cbdc8bb1a79f4d97470e751e0c30363a703 lib/POE/Filter/Syslog.pm
 SHA1 6bca4da9d636b1c035aab3c1c943abd41f18ceb0 t/00-compile.t
 SHA1 f7fb46f3447c3daab2343eaea5acd45868009c6f t/000-signature.t
 SHA1 0851a8717f28f180dd1d54aaa068c6b00c429048 t/01-filter.t
@@ -44,10 +46,13 @@ SHA1 f588f0b5896ce113cb02ccf9c9cc5be3c2be2dff t/02-udp.t
 SHA1 fb1492daeff146fef662963962af517ccc7d2d40 t/03-tcp.t
 SHA1 c1aeebb90672c97b6f7a4579b1061d64362451d3 t/04-main-udp.t
 SHA1 321ef0bf7d7790631de722e4cd621c8f9f784245 t/05-main-tcp.t
+SHA1 e9c6a5881fc60173fbc8d479c1afd2ce3b43bef1 t/99_pod.t
+SHA1 1c68a0f91af35c1a118de30ac1ca715da6f9eaf3 t/99_pod_coverage.t
+SHA1 e87ddfb4c3a5c599982e4b4ef3e9f4f1f6983b46 t/99_test_kwalitee.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.1 (GNU/Linux)
+Version: GnuPG v1.2.2 (GNU/Linux)
 
-iD8DBQFDgP6r5xrCYZCVAioRApmfAJ4sXEbTt1KfH6vlNrz8DJB2YBCEpACfRjAJ
-bPaHyAtvClfGcGw4uobTk+o=
-=W2GP
+iD8DBQFGeSNy7eyMi0ZYZx8RAkVMAKCJ0PAOsTHQ8spbTvcgnpLxMc3HvQCcCbDu
+MPybv3qn63JuviEXa56NO2U=
+=LFEl
 -----END PGP SIGNATURE-----
