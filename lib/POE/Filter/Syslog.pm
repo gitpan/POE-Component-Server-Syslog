@@ -7,7 +7,7 @@ use strict;
 use POE;
 use Time::ParseDate;
 
-our $VERSION = '1.04';
+our $VERSION = '1.06';
 
 our $SYSLOG_REGEXP = q|
 ^<(\d+)>                       # priority -- 1

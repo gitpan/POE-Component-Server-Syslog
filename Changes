@@ -1,6 +1,9 @@
 POE::Component::Server::Syslog
 ==============================
 
+1.06	Wed Jun 20 14:47:34 BST 2007
+	- Fixed version numbers.
+
 1.04	Wed Jun 20 14:01:01 BST 2007
 	- Kwalitee fixes after taking over maintainership.
 	- Changes to POE::Filter::Syslog documentation.
