@@ -14,31 +14,31 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 05fcaa90f8a2add3a61d6fde0ccb7f101bb59250 Changes
+SHA1 20f5ab92d548827381d822d28fffceffc337794f Changes
 SHA1 a97bb3a7b2cbe89ef5995dd8173d1faafacd0044 INSTALL
 SHA1 d629cf536da90572f1be6755409985b199096385 LICENSE
 SHA1 8c2c4f58ce78ae6399a6a0d41fb7d24db93da67a MANIFEST
 SHA1 b3276e3c972626aaae45dab2484183b0d8c45ced MANIFEST.SKIP
-SHA1 2bdf1daa08f661d3cf9f8f0971180905aa5dca90 META.yml
+SHA1 44c794b103e5e725341e9ed2147be8739b673dd2 META.yml
 SHA1 5edf1375f6dc34ef9ad00c42ec0e6557fe9ea1c0 Makefile.PL
 SHA1 edffde3c407a053ab8b4dfc4de7e79ec079895d4 README
-SHA1 fb2919ea520f52d2a3bf91566ae75457264cc7de VERSION
+SHA1 2e2362db191867d3f530592dd13e1c307d445986 VERSION
 SHA1 f40f2f507b3a4ce819446cd911989439bbf92082 examples/tcp_dumper
 SHA1 1924d032aacc3274d9e16145c58479cb95dfc131 examples/tcp_sender
 SHA1 281d3a84c7595ceed9e3222d462b4fb14777b308 examples/udp_dumper
 SHA1 28acb7aa3a8e8a54ca556d06aa62be54fe135f07 examples/udp_sender
-SHA1 78edb89a439463e44c33a72bbee84c54d0dc8aaf inc/Module/Install.pm
-SHA1 8ea4e37df83fd0c1c050be5c8da75545c3828d9b inc/Module/Install/Base.pm
-SHA1 1da6031583c32f0d1ec073b8376102fc51427dcc inc/Module/Install/Can.pm
-SHA1 b779375b90c16af2f31f38a1dd2b5df223c7f2fb inc/Module/Install/Fetch.pm
-SHA1 2054450e1e9c1dd8056362bf4a64ae70d5d71476 inc/Module/Install/Makefile.pm
-SHA1 5d6189b2cad15cf9932a28faafd55130c8247e83 inc/Module/Install/Metadata.pm
-SHA1 02af973fae2ac3531fa6b704574b2b8cb2a08148 inc/Module/Install/Win32.pm
-SHA1 3a2eab96e91cca8d99938cda7791759ae9d97b3a inc/Module/Install/WriteAll.pm
-SHA1 4a37cd2babdb66def8019605a8bdd332f148364f lib/POE/Component/Server/Syslog.pm
-SHA1 001220baae7b048231817bd838c6a22975bd9db9 lib/POE/Component/Server/Syslog/TCP.pm
-SHA1 37c70f6fc8f9d81ece72ca886c0f2fc940926ad8 lib/POE/Component/Server/Syslog/UDP.pm
-SHA1 2ed8451518267c92eb3f17b0919be845755924de lib/POE/Filter/Syslog.pm
+SHA1 7e2cfa1b9efe0d502ee57717649c90ba4bd28ba9 inc/Module/Install.pm
+SHA1 6e1392d80a0f239eecd5664f7f21f922cedb9329 inc/Module/Install/Base.pm
+SHA1 f69417fe831d9cc22a78f00a617afadceade4d81 inc/Module/Install/Can.pm
+SHA1 c61d02895330310048bf388881b5e2e064031561 inc/Module/Install/Fetch.pm
+SHA1 54fcbed19232ec959bb17cfb4410599afc7f0779 inc/Module/Install/Makefile.pm
+SHA1 7d3be9b158e37b2b2c22084740099955623b1d56 inc/Module/Install/Metadata.pm
+SHA1 0a8b66180229ba2f9deaea1fedd0aacf7a7ace6b inc/Module/Install/Win32.pm
+SHA1 d3352eb33fe43a5f3ead513f645224fe34d73bc9 inc/Module/Install/WriteAll.pm
+SHA1 6526ca857766d5a50aef68befaadaa57174fb0d8 lib/POE/Component/Server/Syslog.pm
+SHA1 3ef2c9bf8ec6a22b3587c628b7d441342826c9b3 lib/POE/Component/Server/Syslog/TCP.pm
+SHA1 b8aca8afb23c38a1c7e32475abdcc9c16f941ba3 lib/POE/Component/Server/Syslog/UDP.pm
+SHA1 2d2860a6f6a70b82fc6563febc5148d29a3ecfbd lib/POE/Filter/Syslog.pm
 SHA1 6bca4da9d636b1c035aab3c1c943abd41f18ceb0 t/00-compile.t
 SHA1 f7fb46f3447c3daab2343eaea5acd45868009c6f t/000-signature.t
 SHA1 0851a8717f28f180dd1d54aaa068c6b00c429048 t/01-filter.t
@@ -52,7 +52,7 @@ SHA1 e87ddfb4c3a5c599982e4b4ef3e9f4f1f6983b46 t/99_test_kwalitee.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.2.2 (GNU/Linux)
 
-iD8DBQFGejPw7eyMi0ZYZx8RAlfLAKCNbmRnc1tAmhTJUOp4603qBM8cKQCdEy3a
-oiafnMneberb0Un4vENwvdc=
-=usOV
+iD8DBQFHKbBR7eyMi0ZYZx8RAifGAJ9lqIYU3j/iFKEGZ90C0lBme/VHmgCbBvKG
+iOPVrvdkYmUBaKRWqo6htAM=
+=VoOg
 -----END PGP SIGNATURE-----

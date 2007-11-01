@@ -1,7 +1,8 @@
 --- 
-author: Matt Cashner (sungo@pobox.com)
+author: 
+  - Matt Cashner (sungo@pobox.com)
 distribution_type: module
-generated_by: Module::Install version 0.67
+generated_by: Module::Install version 0.68
 license: bsd
 meta-spec: 
   url: http://module-build.sourceforge.net/META-spec-v1.3.html
@@ -18,4 +19,4 @@ requires:
   Params::Validate: 0
   Test::More: 0
   Time::ParseDate: 0
-version: 1.07
+version: 1.08
