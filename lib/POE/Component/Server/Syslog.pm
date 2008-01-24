@@ -11,7 +11,7 @@ use POE;
 use POE::Component::Server::Syslog::TCP;
 use POE::Component::Server::Syslog::UDP;
 
-our $VERSION = '1.08';
+our $VERSION = '1.10';
 
 sub spawn {
 	my $class = shift;
@@ -77,8 +77,8 @@ This component provides very simple syslog services for POE.
 Spawns a new listener. Requires one argument, C<Type>, which defines the
 subclass to be invoked. This value can be either 'tcp' or 'udp'.  All
 other arguments are passed on to the subclass' constructor. See
-C<POE::Component::Server::Syslog::TCP> and
-C<POE::Component::Server::Syslog::UDP> for specific documentation.  For
+L<POE::Component::Server::Syslog::TCP> and
+L<POE::Component::Server::Syslog::UDP> for specific documentation.  For
 backward compatibility, C<Type> defaults to udp.
 
 =head1 DATE

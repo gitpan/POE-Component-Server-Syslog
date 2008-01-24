@@ -4,7 +4,7 @@ package POE::Component::Server::Syslog::TCP;
 use warnings;
 use strict;
 
-our $VERSION = '1.08';
+our $VERSION = '1.10';
 
 sub BINDADDR        () { '0.0.0.0' }
 sub BINDPORT        () { 514 }
@@ -31,6 +31,8 @@ sub spawn {
 		spec => {
 			InputState   => {
 				type     => &Params::Validate::CODEREF,
+				optional => 1,
+				default  => sub {},
 			},
 			ErrorState   => {
 				type     => &Params::Validate::CODEREF,
@@ -52,6 +54,10 @@ sub spawn {
 				optional => 1,
 				default  => DATAGRAM_MAXLEN,
 			},
+			Alias  		 => {
+				type     => &Params::Validate::SCALAR,
+				optional => 1,
+			},
 		},
 	);
 
@@ -66,6 +72,8 @@ sub spawn {
 			socket_connect => \&socket_connect,
 			socket_error   => \&socket_error,
 			socket_input   => \&socket_input,
+			register	   => \&register,
+			unregister	   => \&unregister,
 			shutdown       => \&shutdown,
 
 			client_input => $args{InputState},
@@ -92,6 +100,8 @@ sub start {
 	unless($_[HEAP]->{socketfactory}) {
 		croak("Unable to setup socketfactory");
 	}
+	$_[KERNEL]->alias_set( $_[HEAP]->{Alias} ) if $_[HEAP]->{Alias};
+    return;
 }
 
 sub socket_connect {
@@ -100,7 +110,8 @@ sub socket_connect {
 
 	if( ( sockaddr_in( getpeername($handle) ) )[1]) {
 		$host = gethostbyaddr( ( sockaddr_in( getpeername($handle) ) )[1], AF_INET );
-	} else {
+	} 
+    else {
 		$host = '[unknown]';
 	}
 
@@ -116,6 +127,7 @@ sub socket_connect {
 		wheel => $wheel,
 		host  => $host,
 	};
+    return;
 }
 
 sub socket_error {
@@ -124,6 +136,7 @@ sub socket_error {
 		$_[KERNEL]->yield( 'client_error', $errop, $errnum, $errstr );
 	}
 	delete $_[HEAP]->{wheels}->{ $wid };
+    return;
 }
 
 sub socket_input {
@@ -135,21 +148,82 @@ sub socket_input {
 			$input->{host} = $info->{host};
 			$_[KERNEL]->yield( 'client_input', $record );
 		}
-	} elsif(ref $input && ref $input eq 'HASH') {
+	} 
+    elsif(ref $input && ref $input eq 'HASH') {
 		$input->{host} = $info->{host};
 		$_[KERNEL]->yield( 'client_input', $input );
-	} else {
+		$_[KERNEL]->post( $_, $_[HEAP]->{sessions}->{$_}->{inputevent}, $input )
+			for keys %{ $_[HEAP]->{sessions} };
+	} 
+    else {
 		$_[KERNEL]->yield( 'client_error', $input );
+		$_[KERNEL]->post( $_, $_[HEAP]->{sessions}->{$_}->{errorevent}, $input )
+			for grep { defined $_[HEAP]->{sessions}->{errorevent} } 
+			    keys %{ $_[HEAP]->{sessions} };
 	}
+    return;
 }
 
 sub shutdown {
-	if($_[HEAP]->{socketfactory}) {
-		$_[HEAP]->{socketfactory}->pause_accept();
-		delete $_[HEAP]->{socketfactory};
+    my ($kernel,$heap) = @_[KERNEL,HEAP];
+	if($heap->{socketfactory}) {
+		$heap->{socketfactory}->pause_accept();
+		delete $heap->{socketfactory};
 	}
+	delete $heap->{wheels};
+	$kernel->alarm_remove_all();
+	$kernel->alias_remove( $_ ) for $kernel->alias_list();
+	$kernel->refcount_decrement( $_, __PACKAGE__ ) 
+		for keys %{ $heap->{sessions} };
+    return;
 }
 
+sub register {
+  my ($kernel,$self,$sender) = @_[KERNEL,HEAP,SENDER];
+  my $sender_id = $sender->ID();
+  my %args;
+  if ( ref $_[ARG0] eq 'HASH' ) {
+    %args = %{ $_[ARG0] };
+  }
+  elsif ( ref $_[ARG0] eq 'ARRAY' ) {
+    %args = @{ $_[ARG0] };
+  }
+  else {
+    %args = @_[ARG0..$#_];
+  }
+  $args{lc $_} = delete $args{$_} for keys %args;
+  unless ( $args{inputevent} ) {
+    warn "No 'inputevent' argument supplied\n";
+    return;
+  }
+  if ( defined $self->{sessions}->{ $sender_id } ) {
+    $self->{sessions}->{ $sender_id } = \%args;
+  }
+  else {
+    $self->{sessions}->{ $sender_id } = \%args;
+    $kernel->refcount_increment( $sender_id, __PACKAGE__ );
+  }
+  return;
+}
+
+sub unregister {
+  my ($kernel,$self,$sender) = @_[KERNEL,HEAP,SENDER];
+  my $sender_id = $sender->ID();
+  my %args;
+  if ( ref $_[ARG0] eq 'HASH' ) {
+    %args = %{ $_[ARG0] };
+  }
+  elsif ( ref $_[ARG0] eq 'ARRAY' ) {
+    %args = @{ $_[ARG0] };
+  }
+  else {
+    %args = @_[ARG0..$#_];
+  }
+  $args{lc $_} = delete $args{$_} for keys %args;
+  my $data = delete $self->{sessions}->{ $sender_id };
+  $kernel->refcount_decrement( $sender_id, __PACKAGE__ ) if $data;
+  return;
+}
 
 1;
 __END__
@@ -177,18 +251,29 @@ POE::Component::Server::Syslog::TCP
 
 This component provides very simple syslog services for POE.
 
-=head1 METHODS
+=head1 CONSTRUCTOR
 
 =head2 spawn()
 
-Spawns a new listener. Requires one argument, C<InputState>, which must
-be a reference to a subroutine. This argument will become a POE state
-that will be called when input from a syslog client has been recieved.
+Spawns a new listener. For a standalone syslog server you may specify 
+C<InputState> option to register a subroutine that will be called on
+input events.
+
+For integration with other POE Sessions and Components you may use the 
+C<register> and C<unregister> states to request that input events be
+sent to your sessions.
+
 Returns the POE::Session object it creates.
 
-C<spawn()> also accepts the following options:
+C<spawn()> accepts the following options:
 
 =over 4
+
+=item * InputState
+
+Requires one argument, C<InputState>, which must
+be a reference to a subroutine. This argument will become a POE state
+that will be called when input from a syslog client has been recieved.
 
 =item * BindAddress
 
@@ -208,6 +293,10 @@ default of most syslog and syslogd implementations.
 An optional code reference. This becomes a POE state that will get
 called when the component recieves a message it cannot parse. The
 erroneous message is passed in as ARG0.
+
+=item * Alias
+
+Optionally specify that the component use the supplied alias.
 
 =back
 
@@ -244,6 +333,42 @@ The message itself. This often includes a process name, pid number, and
 user name.
 
 =back
+
+=head1 INPUT EVENTS
+
+These are events that this component will accept.
+
+=head2 register
+
+This will register the sending session to receive InputEvent and ErrorEvents from the
+component.
+
+Takes a number of parameters:
+
+=over 4
+
+=item * InputEvent
+
+Mandatory parameter, the name of the event in the registering session that will be triggered
+for input from clients. ARG0 will contain a hash reference. See C<InputHandler> for details.
+
+=item * ErrorEvent 
+
+Optional parameter, the name of the event in the registering session that will be triggered
+for input that cannot be parsed. ARG0 will contain the erroneous message.
+
+=back
+
+The component will increment the refcount of the calling session to make sure it hangs around for events.
+Therefore, you should use either C<unregister> or C<shutdown> to terminate registered sessions.
+
+=head2 unregister
+
+This will unregister the sending session from receiving events.
+
+=head2 shutdown
+
+Termintes the component.
 
 =head1 DATE
 

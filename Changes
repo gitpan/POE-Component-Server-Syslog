@@ -1,6 +1,10 @@
 POE::Component::Server::Syslog
 ==============================
 
+1.10	Thu Jan 24 12:26:06 GMT 2008
+	- Added integration with other POE sessions.
+	- Added tests for integration
+
 1.08	Thu Nov  1 10:44:44 GMT 2007
 	- Updated Module::Install to 0.68
 

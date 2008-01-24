@@ -30,6 +30,8 @@ t/02-udp.t
 t/03-tcp.t
 t/04-main-udp.t
 t/05-main-tcp.t
+t/06-session-udp.t
+t/07-session-tcp.t
 t/99_pod.t
 t/99_pod_coverage.t
 t/99_test_kwalitee.t

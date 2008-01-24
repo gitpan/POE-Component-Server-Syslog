@@ -14,15 +14,15 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 20f5ab92d548827381d822d28fffceffc337794f Changes
+SHA1 96febc4d603477c8951ce9eac4dfe68750d76d34 Changes
 SHA1 a97bb3a7b2cbe89ef5995dd8173d1faafacd0044 INSTALL
 SHA1 d629cf536da90572f1be6755409985b199096385 LICENSE
-SHA1 8c2c4f58ce78ae6399a6a0d41fb7d24db93da67a MANIFEST
+SHA1 ef20eeea86d08c3f1e9b91e85018383ef0bc80cc MANIFEST
 SHA1 b3276e3c972626aaae45dab2484183b0d8c45ced MANIFEST.SKIP
-SHA1 44c794b103e5e725341e9ed2147be8739b673dd2 META.yml
+SHA1 f18d663a7567069d1cd1111f8cdfe38fd4c2a38c META.yml
 SHA1 5edf1375f6dc34ef9ad00c42ec0e6557fe9ea1c0 Makefile.PL
 SHA1 edffde3c407a053ab8b4dfc4de7e79ec079895d4 README
-SHA1 2e2362db191867d3f530592dd13e1c307d445986 VERSION
+SHA1 a19224a9fb717dccc14315ef67198acb31857df4 VERSION
 SHA1 f40f2f507b3a4ce819446cd911989439bbf92082 examples/tcp_dumper
 SHA1 1924d032aacc3274d9e16145c58479cb95dfc131 examples/tcp_sender
 SHA1 281d3a84c7595ceed9e3222d462b4fb14777b308 examples/udp_dumper
@@ -35,10 +35,10 @@ SHA1 54fcbed19232ec959bb17cfb4410599afc7f0779 inc/Module/Install/Makefile.pm
 SHA1 7d3be9b158e37b2b2c22084740099955623b1d56 inc/Module/Install/Metadata.pm
 SHA1 0a8b66180229ba2f9deaea1fedd0aacf7a7ace6b inc/Module/Install/Win32.pm
 SHA1 d3352eb33fe43a5f3ead513f645224fe34d73bc9 inc/Module/Install/WriteAll.pm
-SHA1 6526ca857766d5a50aef68befaadaa57174fb0d8 lib/POE/Component/Server/Syslog.pm
-SHA1 3ef2c9bf8ec6a22b3587c628b7d441342826c9b3 lib/POE/Component/Server/Syslog/TCP.pm
-SHA1 b8aca8afb23c38a1c7e32475abdcc9c16f941ba3 lib/POE/Component/Server/Syslog/UDP.pm
-SHA1 2d2860a6f6a70b82fc6563febc5148d29a3ecfbd lib/POE/Filter/Syslog.pm
+SHA1 ad55e5cde62be6df63c6746f27d07c2449c51507 lib/POE/Component/Server/Syslog.pm
+SHA1 11e1a860048f44dbd37bcad895bc8a31a1e905dd lib/POE/Component/Server/Syslog/TCP.pm
+SHA1 57c831c956e871baf02a68b7e0b75e34532193ef lib/POE/Component/Server/Syslog/UDP.pm
+SHA1 818da7c1ff54c50e4bcb4c7259d6e424002136a7 lib/POE/Filter/Syslog.pm
 SHA1 6bca4da9d636b1c035aab3c1c943abd41f18ceb0 t/00-compile.t
 SHA1 f7fb46f3447c3daab2343eaea5acd45868009c6f t/000-signature.t
 SHA1 0851a8717f28f180dd1d54aaa068c6b00c429048 t/01-filter.t
@@ -46,13 +46,15 @@ SHA1 f588f0b5896ce113cb02ccf9c9cc5be3c2be2dff t/02-udp.t
 SHA1 fb1492daeff146fef662963962af517ccc7d2d40 t/03-tcp.t
 SHA1 c1aeebb90672c97b6f7a4579b1061d64362451d3 t/04-main-udp.t
 SHA1 321ef0bf7d7790631de722e4cd621c8f9f784245 t/05-main-tcp.t
+SHA1 224e3feef21e2702b375293903432aec1eb6aa1b t/06-session-udp.t
+SHA1 2147f7091f522a5bab6edf50d1dcac294dbce871 t/07-session-tcp.t
 SHA1 e9c6a5881fc60173fbc8d479c1afd2ce3b43bef1 t/99_pod.t
 SHA1 4a2f2a6250fea40711f1f9237176d18052dba79b t/99_pod_coverage.t
 SHA1 e87ddfb4c3a5c599982e4b4ef3e9f4f1f6983b46 t/99_test_kwalitee.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.2.2 (GNU/Linux)
 
-iD8DBQFHKbBR7eyMi0ZYZx8RAifGAJ9lqIYU3j/iFKEGZ90C0lBme/VHmgCbBvKG
-iOPVrvdkYmUBaKRWqo6htAM=
-=VoOg
+iD8DBQFHmISA7eyMi0ZYZx8RAu0SAJ9ON/MqzE2gNtkin+1KfRYidObzXgCbBFro
+BAQcNX4U4xuhIu6L7I/rR/Y=
+=vPoB
 -----END PGP SIGNATURE-----
