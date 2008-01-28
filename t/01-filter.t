@@ -6,9 +6,11 @@ use strict;
 use Test::More tests => 14;
 
 use POE::Filter::Syslog;
-use POSIX 'strftime';
+use POSIX qw(strftime  setlocale LC_ALL LC_CTYPE);
 
 my $filter = POE::Filter::Syslog->new();
+
+my $loc = setlocale( LC_ALL, 'C' );
 
 #
 # Syslog uses an ambiguous datetime format.  No year and no timezone.

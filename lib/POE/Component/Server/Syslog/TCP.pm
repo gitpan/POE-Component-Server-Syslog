@@ -4,7 +4,7 @@ package POE::Component::Server::Syslog::TCP;
 use warnings;
 use strict;
 
-our $VERSION = '1.10';
+our $VERSION = '1.12';
 
 sub BINDADDR        () { '0.0.0.0' }
 sub BINDPORT        () { 514 }
