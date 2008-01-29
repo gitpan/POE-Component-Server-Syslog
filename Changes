@@ -1,6 +1,10 @@
 POE::Component::Server::Syslog
 ==============================
 
+1.14	Tue Jan 29 18:30:09 GMT 2008
+	- Changed all the tests after confirmation that the previous
+	  changes worked on imacat's smoker. Hurrah.
+
 1.12	Mon Jan 28 13:51:37 GMT 2008
 	- Some changes to tests to see if it fixes locale issues on
 	  imacat's smoker.

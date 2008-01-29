@@ -11,7 +11,7 @@ use POE;
 use POE::Component::Server::Syslog::TCP;
 use POE::Component::Server::Syslog::UDP;
 
-our $VERSION = '1.12';
+our $VERSION = '1.14';
 
 sub spawn {
 	my $class = shift;

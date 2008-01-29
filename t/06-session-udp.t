@@ -5,11 +5,13 @@ use strict;
 use Test::More tests => 4;
 
 use Socket;
-use POSIX qw(strftime);
+use POSIX qw(strftime setlocale LC_ALL LC_CTYPE);
 use POE;
 use POE::Component::Server::Syslog::UDP;
 
 our $TIME = time();
+
+my $loc = setlocale( LC_ALL, 'C' );
 
 POE::Component::Server::Syslog::UDP->spawn(
 		Alias		 => 'moocow',
