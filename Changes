@@ -1,6 +1,9 @@
 POE::Component::Server::Syslog
 ==============================
 
+1.16	Tue Apr 15 14:06:15 BST 2008
+	- Kwalitee fixes.
+
 1.14	Tue Jan 29 18:30:09 GMT 2008
 	- Changed all the tests after confirmation that the previous
 	  changes worked on imacat's smoker. Hurrah.
