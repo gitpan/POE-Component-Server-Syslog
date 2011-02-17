@@ -8,7 +8,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.42
 distribution_type: module
-generated_by: 'Module::Install version 0.90'
+generated_by: 'Module::Install version 1.00'
 license: bsd
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -22,16 +22,16 @@ no_index:
 provides:
   POE::Component::Server::Syslog:
     file: lib/POE/Component/Server/Syslog.pm
-    version: 1.18
+    version: 1.20
   POE::Component::Server::Syslog::TCP:
     file: lib/POE/Component/Server/Syslog/TCP.pm
-    version: 1.18
+    version: 1.20
   POE::Component::Server::Syslog::UDP:
     file: lib/POE/Component/Server/Syslog/UDP.pm
-    version: 1.18
+    version: 1.20
   POE::Filter::Syslog:
     file: lib/POE/Filter/Syslog.pm
-    version: 1.18
+    version: 1.20
 requires:
   Carp: 0
   IO::Socket: 0
@@ -48,4 +48,4 @@ resources:
   homepage: http://github.com/bingos/poe-component-server-syslog/tree
   license: http://opensource.org/licenses/bsd-license.php
   repository: git://github.com/bingos/poe-component-server-syslog.git
-version: 1.18
+version: 1.20
